@@ -5,13 +5,9 @@
     <classes>
       <class name="com.qa.tests.SearchHotelPageTest">
         <methods>
-          <include name="testDropdownSelection"/>
-          <include name="testRoomTypeDropdownOptions"/>
-          <include name="testHotelsDropdownOptions"/>
+          <include name="searchHotelButtonTest"/>
           <include name="setUp"/>
-          <include name="testLocDropdownOptions"/>
           <include name="tearDown"/>
-          <include name="searchHotelTest"/>
         </methods>
       </class> <!-- com.qa.tests.SearchHotelPageTest -->
     </classes>

@@ -3,10 +3,12 @@ package com.qa.adactin.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import com.qa.adactin.base.TestBase;
 
@@ -58,50 +60,67 @@ public class SearchHotelPage extends TestBase {
 		return options;
 	}
 
-	public List<String> getHotelsDropdownOptions() {
+	public List<String> getDropdownOptions() {
 		Select dropdown = new Select(hotelsDropDown);
-		List<WebElement> optionElements = dropdown.getOptions();
-		List<String> options = new ArrayList<>();
-		for (WebElement element : optionElements) {
-			options.add(element.getText());
+		List<WebElement> options = dropdown.getOptions();
+		List<String> optionTexts = new ArrayList<>();
+		for (WebElement option : options) {
+			optionTexts.add(option.getText());
 		}
-		return options;
+		return optionTexts;
+	}
+	
+
+	public SelectHotelPage validateSearchHotelButton() throws InterruptedException {
+		Select select = new Select(locationDropDown);
+		select.selectByVisibleText("Sydney");
+		Thread.sleep(3000);
+		Select select1 = new Select(hotelsDropDown);
+		select1.selectByIndex(1);
+		Thread.sleep(3000);
+		Select select2 = new Select(roomTypeDropDown);
+		select2.selectByVisibleText("Standard");
+
+		searchButton.click();
+		return new SelectHotelPage();
+
 	}
 
-	public List<String> getRoomTypeDropdownOptions() {
-		Select dropdown = new Select(roomTypeDropDown);
-		List<WebElement> optionElements = dropdown.getOptions();
-		List<String> options = new ArrayList<>();
-		for (WebElement element : optionElements) {
-			options.add(element.getText());
-		}
-		return options;
-	}
-//	 public List<String> getNumOfRoomsDropdownOptions() {
-//	        Select dropdown = new Select(numberOfRoomsDropDown);
-//	        List<WebElement> optionElements = dropdown.getOptions();
-////	        dropdown.se
-//	        List<String> options = new ArrayList<>();
-//	        for (WebElement element : optionElements) {
-//	            options.add(element.getText());
-//	        }
-//	        return options;
-//	    }
-
-	public void selectOptionByVisibleText(String value) {
-		Select dropdown = new Select(numberOfRoomsDropDown);
-		dropdown.selectByVisibleText(value);
-		;
-	}
-
-	public List<WebElement> getDropdownOptions() {
-		Select dropdown = new Select(numberOfRoomsDropDown);
-		return dropdown.getOptions();
-	}
-
-	public String getSelectedOptionText() {
-		Select dropdown = new Select(numberOfRoomsDropDown);
-		return dropdown.getFirstSelectedOption().getText();
-	}
+//	public void validateHotelsDropDownOptions() {
+//		Select dropdown = new Select(hotelsDropDown);
+//		String expectedOptions[] = { "- Select Hotel -", "Hotel Creek", "Hotel Sunshine", "Hotel Hervey",
+//				"Hotel Cornice" };
+//		List<WebElement> ele = dropdown.getOptions();
+//		for (int i = 0; i < ele.size(); i++) {
+//			Assert.assertEquals(ele.get(i).getText(), expectedOptions[i]);
+//		}
+//	}
 
 }
+
+//public List<String> getNumOfRoomsDropdownOptions() {
+//Select dropdown = new Select(numberOfRoomsDropDown);
+//List<WebElement> optionElements = dropdown.getOptions();
+////dropdown.se
+//List<String> options = new ArrayList<>();
+//for (WebElement element : optionElements) {
+//    options.add(element.getText());
+//}
+//return options;
+//}
+
+//public void selectOptionByVisibleText(String value) {
+//Select dropdown = new Select(locationDropDown);
+//dropdown.selectByVisibleText(value);
+//
+//}
+//
+//public List<WebElement> getDropdownOptions() {
+//Select dropdown = new Select(locationDropDown);
+//return dropdown.getOptions();
+//}
+//
+//public String getSelectedOptionText() {
+//Select dropdown = new Select(locationDropDown);
+//return dropdown.getFirstSelectedOption().getText();
+//}
