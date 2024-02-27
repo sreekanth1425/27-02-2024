@@ -47,6 +47,7 @@ public class SelectHotelPageTest extends TestBase {
 	@AfterMethod
 	public void tearDown() {
 		driver.close();
+		System.exit(0);
 	}
 
 }
